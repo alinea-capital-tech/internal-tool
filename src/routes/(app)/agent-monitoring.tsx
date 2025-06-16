@@ -24,7 +24,7 @@ import {
   ThunderboltOutlined,
 } from "@ant-design/icons";
 
-const { Title, Text, Paragraph } = Typography;
+const { Title, Text } = Typography;
 const { TabPane } = Tabs;
 
 export const Route = createFileRoute("/(app)/agent-monitoring")({

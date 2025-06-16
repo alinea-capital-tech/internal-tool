@@ -1,7 +1,7 @@
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
 export type InputTypes = "text" | "password" | "textarea";

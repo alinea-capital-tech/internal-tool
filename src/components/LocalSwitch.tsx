@@ -17,7 +17,7 @@ const LocaleSwitch = () => {
     },
   ];
 
-  const handlerLocale = async (value: string) => {
+  const handlerLocale = async () => {
     setTimeout(() => {
       window.location.href = window.location.href;
     }, 500);
@@ -43,7 +43,7 @@ const LocaleSwitch = () => {
             lineHeight: 1,
             padding: "12px",
           }}
-          onClick={() => handlerLocale(option.value)}
+          onClick={() => handlerLocale()}
         >
           {option.emoji} {option.label}
         </Button>

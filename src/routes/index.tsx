@@ -1,7 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import logo from "../logo.svg";
 import "../App.css";
-import LocaleSwitch from "@/components/LocalSwitch";
 import Logo from "@/components/Logo";
 import { FormProvider, useForm } from "react-hook-form";
 import LoginForm from "@/components/LoginForm";
