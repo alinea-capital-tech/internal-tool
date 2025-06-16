@@ -11,14 +11,76 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as appRouteImport } from './routes/(app)/route'
 import { Route as IndexImport } from './routes/index'
+import { Route as appStrategyHealthImport } from './routes/(app)/strategy-health'
+import { Route as appRiskCenterImport } from './routes/(app)/risk-center'
+import { Route as appPortfolioLiveImport } from './routes/(app)/portfolio-live'
+import { Route as appOmsImport } from './routes/(app)/oms'
+import { Route as appMacroImport } from './routes/(app)/macro'
+import { Route as appDashboardImport } from './routes/(app)/dashboard'
+import { Route as appBacktestHubImport } from './routes/(app)/backtest-hub'
+import { Route as appAgentMonitoringImport } from './routes/(app)/agent-monitoring'
 
 // Create/Update Routes
+
+const appRouteRoute = appRouteImport.update({
+  id: '/(app)',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const appStrategyHealthRoute = appStrategyHealthImport.update({
+  id: '/strategy-health',
+  path: '/strategy-health',
+  getParentRoute: () => appRouteRoute,
+} as any)
+
+const appRiskCenterRoute = appRiskCenterImport.update({
+  id: '/risk-center',
+  path: '/risk-center',
+  getParentRoute: () => appRouteRoute,
+} as any)
+
+const appPortfolioLiveRoute = appPortfolioLiveImport.update({
+  id: '/portfolio-live',
+  path: '/portfolio-live',
+  getParentRoute: () => appRouteRoute,
+} as any)
+
+const appOmsRoute = appOmsImport.update({
+  id: '/oms',
+  path: '/oms',
+  getParentRoute: () => appRouteRoute,
+} as any)
+
+const appMacroRoute = appMacroImport.update({
+  id: '/macro',
+  path: '/macro',
+  getParentRoute: () => appRouteRoute,
+} as any)
+
+const appDashboardRoute = appDashboardImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => appRouteRoute,
+} as any)
+
+const appBacktestHubRoute = appBacktestHubImport.update({
+  id: '/backtest-hub',
+  path: '/backtest-hub',
+  getParentRoute: () => appRouteRoute,
+} as any)
+
+const appAgentMonitoringRoute = appAgentMonitoringImport.update({
+  id: '/agent-monitoring',
+  path: '/agent-monitoring',
+  getParentRoute: () => appRouteRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -32,39 +94,184 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/(app)': {
+      id: '/(app)'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof appRouteImport
+      parentRoute: typeof rootRoute
+    }
+    '/(app)/agent-monitoring': {
+      id: '/(app)/agent-monitoring'
+      path: '/agent-monitoring'
+      fullPath: '/agent-monitoring'
+      preLoaderRoute: typeof appAgentMonitoringImport
+      parentRoute: typeof appRouteImport
+    }
+    '/(app)/backtest-hub': {
+      id: '/(app)/backtest-hub'
+      path: '/backtest-hub'
+      fullPath: '/backtest-hub'
+      preLoaderRoute: typeof appBacktestHubImport
+      parentRoute: typeof appRouteImport
+    }
+    '/(app)/dashboard': {
+      id: '/(app)/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof appDashboardImport
+      parentRoute: typeof appRouteImport
+    }
+    '/(app)/macro': {
+      id: '/(app)/macro'
+      path: '/macro'
+      fullPath: '/macro'
+      preLoaderRoute: typeof appMacroImport
+      parentRoute: typeof appRouteImport
+    }
+    '/(app)/oms': {
+      id: '/(app)/oms'
+      path: '/oms'
+      fullPath: '/oms'
+      preLoaderRoute: typeof appOmsImport
+      parentRoute: typeof appRouteImport
+    }
+    '/(app)/portfolio-live': {
+      id: '/(app)/portfolio-live'
+      path: '/portfolio-live'
+      fullPath: '/portfolio-live'
+      preLoaderRoute: typeof appPortfolioLiveImport
+      parentRoute: typeof appRouteImport
+    }
+    '/(app)/risk-center': {
+      id: '/(app)/risk-center'
+      path: '/risk-center'
+      fullPath: '/risk-center'
+      preLoaderRoute: typeof appRiskCenterImport
+      parentRoute: typeof appRouteImport
+    }
+    '/(app)/strategy-health': {
+      id: '/(app)/strategy-health'
+      path: '/strategy-health'
+      fullPath: '/strategy-health'
+      preLoaderRoute: typeof appStrategyHealthImport
+      parentRoute: typeof appRouteImport
+    }
   }
 }
 
 // Create and export the route tree
 
+interface appRouteRouteChildren {
+  appAgentMonitoringRoute: typeof appAgentMonitoringRoute
+  appBacktestHubRoute: typeof appBacktestHubRoute
+  appDashboardRoute: typeof appDashboardRoute
+  appMacroRoute: typeof appMacroRoute
+  appOmsRoute: typeof appOmsRoute
+  appPortfolioLiveRoute: typeof appPortfolioLiveRoute
+  appRiskCenterRoute: typeof appRiskCenterRoute
+  appStrategyHealthRoute: typeof appStrategyHealthRoute
+}
+
+const appRouteRouteChildren: appRouteRouteChildren = {
+  appAgentMonitoringRoute: appAgentMonitoringRoute,
+  appBacktestHubRoute: appBacktestHubRoute,
+  appDashboardRoute: appDashboardRoute,
+  appMacroRoute: appMacroRoute,
+  appOmsRoute: appOmsRoute,
+  appPortfolioLiveRoute: appPortfolioLiveRoute,
+  appRiskCenterRoute: appRiskCenterRoute,
+  appStrategyHealthRoute: appStrategyHealthRoute,
+}
+
+const appRouteRouteWithChildren = appRouteRoute._addFileChildren(
+  appRouteRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof appRouteRouteWithChildren
+  '/agent-monitoring': typeof appAgentMonitoringRoute
+  '/backtest-hub': typeof appBacktestHubRoute
+  '/dashboard': typeof appDashboardRoute
+  '/macro': typeof appMacroRoute
+  '/oms': typeof appOmsRoute
+  '/portfolio-live': typeof appPortfolioLiveRoute
+  '/risk-center': typeof appRiskCenterRoute
+  '/strategy-health': typeof appStrategyHealthRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/': typeof appRouteRouteWithChildren
+  '/agent-monitoring': typeof appAgentMonitoringRoute
+  '/backtest-hub': typeof appBacktestHubRoute
+  '/dashboard': typeof appDashboardRoute
+  '/macro': typeof appMacroRoute
+  '/oms': typeof appOmsRoute
+  '/portfolio-live': typeof appPortfolioLiveRoute
+  '/risk-center': typeof appRiskCenterRoute
+  '/strategy-health': typeof appStrategyHealthRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/(app)': typeof appRouteRouteWithChildren
+  '/(app)/agent-monitoring': typeof appAgentMonitoringRoute
+  '/(app)/backtest-hub': typeof appBacktestHubRoute
+  '/(app)/dashboard': typeof appDashboardRoute
+  '/(app)/macro': typeof appMacroRoute
+  '/(app)/oms': typeof appOmsRoute
+  '/(app)/portfolio-live': typeof appPortfolioLiveRoute
+  '/(app)/risk-center': typeof appRiskCenterRoute
+  '/(app)/strategy-health': typeof appStrategyHealthRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/agent-monitoring'
+    | '/backtest-hub'
+    | '/dashboard'
+    | '/macro'
+    | '/oms'
+    | '/portfolio-live'
+    | '/risk-center'
+    | '/strategy-health'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/agent-monitoring'
+    | '/backtest-hub'
+    | '/dashboard'
+    | '/macro'
+    | '/oms'
+    | '/portfolio-live'
+    | '/risk-center'
+    | '/strategy-health'
+  id:
+    | '__root__'
+    | '/'
+    | '/(app)'
+    | '/(app)/agent-monitoring'
+    | '/(app)/backtest-hub'
+    | '/(app)/dashboard'
+    | '/(app)/macro'
+    | '/(app)/oms'
+    | '/(app)/portfolio-live'
+    | '/(app)/risk-center'
+    | '/(app)/strategy-health'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  appRouteRoute: typeof appRouteRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  appRouteRoute: appRouteRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -77,11 +284,57 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/(app)"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/(app)": {
+      "filePath": "(app)/route.tsx",
+      "children": [
+        "/(app)/agent-monitoring",
+        "/(app)/backtest-hub",
+        "/(app)/dashboard",
+        "/(app)/macro",
+        "/(app)/oms",
+        "/(app)/portfolio-live",
+        "/(app)/risk-center",
+        "/(app)/strategy-health"
+      ]
+    },
+    "/(app)/agent-monitoring": {
+      "filePath": "(app)/agent-monitoring.tsx",
+      "parent": "/(app)"
+    },
+    "/(app)/backtest-hub": {
+      "filePath": "(app)/backtest-hub.tsx",
+      "parent": "/(app)"
+    },
+    "/(app)/dashboard": {
+      "filePath": "(app)/dashboard.tsx",
+      "parent": "/(app)"
+    },
+    "/(app)/macro": {
+      "filePath": "(app)/macro.tsx",
+      "parent": "/(app)"
+    },
+    "/(app)/oms": {
+      "filePath": "(app)/oms.tsx",
+      "parent": "/(app)"
+    },
+    "/(app)/portfolio-live": {
+      "filePath": "(app)/portfolio-live.tsx",
+      "parent": "/(app)"
+    },
+    "/(app)/risk-center": {
+      "filePath": "(app)/risk-center.tsx",
+      "parent": "/(app)"
+    },
+    "/(app)/strategy-health": {
+      "filePath": "(app)/strategy-health.tsx",
+      "parent": "/(app)"
     }
   }
 }

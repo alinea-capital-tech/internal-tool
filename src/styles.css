@@ -1,3 +1,4 @@
+@import "tailwindcss";
 
 body {
   margin: 0;
@@ -11,4 +12,92 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+
+.locale-switch,
+.locale-switch___login {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.locale-switch___login {
+  position: absolute;
+  z-index: 15;
+  top: 20px;
+  right: 20px;
+}
+
+.locale-switch___login button {
+  display: flex !important;
+  box-sizing: border-box !important;
+  transition: all 0.15s;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 14;
+  font-weight: 700;
+  border: none !important;
+  line-height: 1;
+  min-width: 110px !important;
+  height: 49px;
+  min-height: 49px;
+  transition: all 0.15s;
+  cursor: pointer;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+
+.locale-switch___login button:hover {
+  background-color: #e6e6e6 !important;
+  border: none !important;
+}
+
+.locale-switch___login button img {
+  flex-shrink: 0;
+  min-width: 20px;
+}
+
+.locale-switch___login button:nth-child(1) {
+  z-index: 10;
+}
+
+.locale-switch___login button:nth-child(2) {
+  z-index: 9;
+  opacity: 0;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  font-weight: 400 !important;
+  justify-content: flex-start;
+}
+
+.locale-switch___login button:nth-child(3) {
+  z-index: 8;
+  opacity: 0;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  font-weight: 400 !important;
+  justify-content: flex-start;
+}
+
+.locale-switch___login:hover button:nth-child(2) {
+  top: 50px;
+  opacity: 1;
+  min-width: 120px !important;
+}
+
+.locale-switch___login:hover button:nth-child(3) {
+  top: 99px;
+  opacity: 1;
+  min-width: 120px !important;
+}
+
+.profile .locale-switch___login {
+  position: relative;
+  height: 180px;
+  width: 150px;
+  margin-right: auto;
 }
