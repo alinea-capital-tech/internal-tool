@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
 import "../App.css";
 import Logo from "@/components/Logo";
 import { FormProvider, useForm } from "react-hook-form";
@@ -10,6 +10,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Login() {
+  const router = useRouter();
   const methods = useForm({
     mode: "all",
   });
@@ -17,6 +18,9 @@ function Login() {
     // Handle login logic here
     console.log(methods.getValues());
     console.log("Login submitted");
+    router.navigate({
+      to: "/dashboard",
+    });
   };
   return (
     <>
