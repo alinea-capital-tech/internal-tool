@@ -473,9 +473,13 @@ function RouteComponent() {
           columns={columns}
           dataSource={trades}
           rowKey="id"
-          pagination={{ pageSize: 10 }}
-          scroll={{ x: 1500 }}
-          size="middle"
+          pagination={{
+            pageSize: 10,
+            showSizeChanger: true,
+            showQuickJumper: true,
+          }}
+          scroll={{ x: 1200, y: 400 }}
+          size="small"
         />
       </Card>
     </div>

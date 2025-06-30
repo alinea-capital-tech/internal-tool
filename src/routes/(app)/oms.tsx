@@ -496,6 +496,7 @@ function RouteComponent() {
                   dataSource={tradesByAssetClass}
                   rowKey="assetClass"
                   pagination={false}
+                  scroll={{ x: 600 }}
                   size="small"
                 />
               </Card>
@@ -507,6 +508,7 @@ function RouteComponent() {
                   dataSource={tradesByOrderType}
                   rowKey="orderType"
                   pagination={false}
+                  scroll={{ x: 700 }}
                   size="small"
                 />
               </Card>
@@ -518,6 +520,7 @@ function RouteComponent() {
                   dataSource={tradesByTiming}
                   rowKey="timeSlot"
                   pagination={false}
+                  scroll={{ x: 600 }}
                   size="small"
                 />
               </Card>
@@ -534,6 +537,7 @@ function RouteComponent() {
                   dataSource={feeBreakdown}
                   rowKey="category"
                   pagination={false}
+                  scroll={{ x: 500 }}
                   size="small"
                 />
               </Card>
@@ -620,6 +624,7 @@ function RouteComponent() {
                   dataSource={executionQuality}
                   rowKey="venue"
                   pagination={false}
+                  scroll={{ x: 700 }}
                   size="small"
                 />
               </Card>

@@ -587,7 +587,8 @@ function RouteComponent() {
                   columns={insightColumns}
                   dataSource={agentInsights}
                   rowKey="id"
-                  pagination={false}
+                  pagination={{ pageSize: 10, showSizeChanger: true }}
+                  scroll={{ x: 1200, y: 400 }}
                   size="small"
                 />
               </Card>
@@ -611,6 +612,7 @@ function RouteComponent() {
                   dataSource={agentMetrics}
                   rowKey="agent"
                   pagination={false}
+                  scroll={{ x: 900 }}
                   size="small"
                 />
               </Card>
@@ -636,7 +638,8 @@ function RouteComponent() {
                   columns={auditColumns}
                   dataSource={decisionAuditTrail}
                   rowKey="id"
-                  pagination={false}
+                  pagination={{ pageSize: 10, showSizeChanger: true }}
+                  scroll={{ x: 1100, y: 400 }}
                   size="small"
                 />
               </Card>

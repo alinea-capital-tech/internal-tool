@@ -580,6 +580,7 @@ function RouteComponent() {
                   dataSource={macroIndicators}
                   rowKey="indicator"
                   pagination={false}
+                  scroll={{ x: 900 }}
                   size="small"
                 />
               </Card>
@@ -596,6 +597,7 @@ function RouteComponent() {
                   dataSource={fxRates}
                   rowKey="pair"
                   pagination={false}
+                  scroll={{ x: 700 }}
                   size="small"
                 />
               </Card>
@@ -661,6 +663,7 @@ function RouteComponent() {
                   dataSource={marketSentiment}
                   rowKey="source"
                   pagination={false}
+                  scroll={{ x: 800 }}
                   size="small"
                 />
               </Card>
@@ -684,6 +687,7 @@ function RouteComponent() {
                   dataSource={economicCalendar}
                   rowKey={(record) => `${record.date}-${record.event}`}
                   pagination={false}
+                  scroll={{ x: 800 }}
                   size="small"
                 />
               </Card>

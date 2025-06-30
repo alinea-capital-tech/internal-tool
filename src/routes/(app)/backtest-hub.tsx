@@ -547,7 +547,8 @@ function RouteComponent() {
                   columns={parameterColumns}
                   dataSource={backtestParameters}
                   rowKey="id"
-                  pagination={false}
+                  pagination={{ pageSize: 10, showSizeChanger: true }}
+                  scroll={{ x: 1200 }}
                   size="small"
                 />
               </Card>
@@ -578,6 +579,7 @@ function RouteComponent() {
                   dataSource={controlledExperiments}
                   rowKey="id"
                   pagination={false}
+                  scroll={{ x: 1300 }}
                   size="small"
                 />
               </Card>
@@ -608,6 +610,7 @@ function RouteComponent() {
                   dataSource={backtestResults}
                   rowKey="id"
                   pagination={false}
+                  scroll={{ x: 1000 }}
                   size="small"
                 />
               </Card>

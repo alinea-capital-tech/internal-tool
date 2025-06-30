@@ -610,6 +610,7 @@ function RouteComponent() {
                   dataSource={riskIndicators}
                   rowKey="indicator"
                   pagination={false}
+                  scroll={{ x: 800 }}
                   size="small"
                 />
               </Card>
@@ -632,8 +633,8 @@ function RouteComponent() {
                   columns={auditColumns}
                   dataSource={orderAuditTrail}
                   rowKey="id"
-                  pagination={{ pageSize: 10 }}
-                  scroll={{ x: 1400 }}
+                  pagination={{ pageSize: 10, showSizeChanger: true }}
+                  scroll={{ x: 1400, y: 400 }}
                   size="small"
                 />
               </Card>
@@ -660,6 +661,7 @@ function RouteComponent() {
                   dataSource={complianceChecks}
                   rowKey="rule"
                   pagination={false}
+                  scroll={{ x: 1000 }}
                   size="small"
                 />
               </Card>
@@ -676,6 +678,7 @@ function RouteComponent() {
                   dataSource={regulatoryCompliance}
                   rowKey="regulation"
                   pagination={false}
+                  scroll={{ x: 700 }}
                   size="small"
                 />
               </Card>

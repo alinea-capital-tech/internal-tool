@@ -590,8 +590,8 @@ function RouteComponent() {
                   columns={positionColumns}
                   dataSource={currentPositions}
                   rowKey="symbol"
-                  pagination={false}
-                  scroll={{ x: 1400 }}
+                  pagination={{ pageSize: 10, showSizeChanger: true }}
+                  scroll={{ x: 1600, y: 400 }}
                   size="small"
                 />
               </Card>
@@ -618,6 +618,7 @@ function RouteComponent() {
                   dataSource={strategyPerformance}
                   rowKey="strategy"
                   pagination={false}
+                  scroll={{ x: 1000 }}
                   size="small"
                 />
               </Card>
@@ -641,6 +642,7 @@ function RouteComponent() {
                   dataSource={sectorAnalysis}
                   rowKey="sector"
                   pagination={false}
+                  scroll={{ x: 900 }}
                   size="small"
                 />
               </Card>

@@ -573,6 +573,7 @@ function RouteComponent() {
                   dataSource={strategyKPIs}
                   rowKey="strategy"
                   pagination={false}
+                  scroll={{ x: 1200 }}
                   size="small"
                 />
               </Card>
@@ -595,7 +596,8 @@ function RouteComponent() {
                   columns={alertColumns}
                   dataSource={degradationAlerts}
                   rowKey="id"
-                  pagination={false}
+                  pagination={{ pageSize: 10, showSizeChanger: true }}
+                  scroll={{ x: 1100, y: 400 }}
                   size="small"
                 />
               </Card>
@@ -622,6 +624,7 @@ function RouteComponent() {
                   dataSource={strategyComparison}
                   rowKey="metric"
                   pagination={false}
+                  scroll={{ x: 900 }}
                   size="small"
                 />
               </Card>
