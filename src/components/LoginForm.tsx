@@ -7,12 +7,6 @@ const LoginForm = () => {
       label: "Correo electrónico",
       placeholder: "Ingresa tu correo electrónico",
     },
-    {
-      name: "password",
-      label: "Contraseña",
-      placeholder: "Ingrese su contraseña",
-      type: "password",
-    },
   ];
 
   return (

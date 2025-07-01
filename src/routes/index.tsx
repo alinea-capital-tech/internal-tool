@@ -4,24 +4,45 @@ import Logo from "@/components/Logo";
 import { FormProvider, useForm } from "react-hook-form";
 import LoginForm from "@/components/LoginForm";
 import { Button } from "antd";
+import { useMutation } from "@apollo/client";
+import { SIGN_IN_ADMIN } from "@/lib/mutations/user.mutations";
+import { useEffect } from "react";
 
 export const Route = createFileRoute("/")({
   component: Login,
 });
 
 function Login() {
+  const [signInAdmin, { data, loading, error }] = useMutation(SIGN_IN_ADMIN);
   const router = useRouter();
   const methods = useForm({
     mode: "all",
   });
-  const handleLogin = () => {
+  const handleLogin = async () => {
     // Handle login logic here
+    signInAdmin({
+      variables: {
+        email: methods.getValues("email"),
+      },
+    });
     console.log(methods.getValues());
     console.log("Login submitted");
-    router.navigate({
-      to: "/dashboard",
-    });
   };
+
+  useEffect(() => {
+    if (data) {
+      console.log("Login successful", data);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (error) {
+      console.error("Login error", error);
+      // Optionally, you can show an error message to the user
+      alert("Error al iniciar sesión. Por favor, inténtalo de nuevo.");
+    }
+  }, [error]);
+
   return (
     <>
       {/* <LocaleSwitch /> */}
