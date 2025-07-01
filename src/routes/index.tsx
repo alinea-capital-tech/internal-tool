@@ -32,6 +32,9 @@ function Login() {
   useEffect(() => {
     if (data) {
       console.log("Login successful", data);
+      router.navigate({
+        to: "/dashboard",
+      });
     }
   }, [data]);
 
@@ -57,6 +60,7 @@ function Login() {
             >
               <LoginForm />
               <Button
+                loading={loading}
                 htmlType="submit"
                 size="large"
                 type="primary"
