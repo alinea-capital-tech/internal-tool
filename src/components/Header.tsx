@@ -47,8 +47,10 @@ const Header = () => {
       <AvatarDropdown>
         <div className="flex flex-col gap-2">
           {navLinks.map((link) => (
-            <AlineaLink href={link.href} key={link.label}>
-              {link.label}
+            <AlineaLink href={link.href} key={link.label} className="">
+              <label className="px-4 py-2 rounded-sm block hover:bg-neutral-200 text-neutral-700 hover:cursor-pointer">
+                {link.label}
+              </label>
             </AlineaLink>
           ))}
           <Link
@@ -58,7 +60,9 @@ const Header = () => {
               console.log("Cerrar sesión clicked");
             }}
           >
-            Cerrar sesión
+            <label className="px-4 py-2 rounded-sm block hover:bg-neutral-200 text-neutral-700 hover:cursor-pointer">
+              Cerrar sesión
+            </label>
           </Link>
         </div>
       </AvatarDropdown>
