@@ -19,6 +19,7 @@ import { Route as appPortfolioLiveImport } from './routes/(app)/portfolio-live'
 import { Route as appOmsImport } from './routes/(app)/oms'
 import { Route as appMacroImport } from './routes/(app)/macro'
 import { Route as appDashboardImport } from './routes/(app)/dashboard'
+import { Route as appCorrelationsImport } from './routes/(app)/correlations'
 import { Route as appBacktestHubImport } from './routes/(app)/backtest-hub'
 import { Route as appAgentMonitoringImport } from './routes/(app)/agent-monitoring'
 
@@ -71,6 +72,12 @@ const appDashboardRoute = appDashboardImport.update({
   getParentRoute: () => appRouteRoute,
 } as any)
 
+const appCorrelationsRoute = appCorrelationsImport.update({
+  id: '/correlations',
+  path: '/correlations',
+  getParentRoute: () => appRouteRoute,
+} as any)
+
 const appBacktestHubRoute = appBacktestHubImport.update({
   id: '/backtest-hub',
   path: '/backtest-hub',
@@ -113,6 +120,13 @@ declare module '@tanstack/react-router' {
       path: '/backtest-hub'
       fullPath: '/backtest-hub'
       preLoaderRoute: typeof appBacktestHubImport
+      parentRoute: typeof appRouteImport
+    }
+    '/(app)/correlations': {
+      id: '/(app)/correlations'
+      path: '/correlations'
+      fullPath: '/correlations'
+      preLoaderRoute: typeof appCorrelationsImport
       parentRoute: typeof appRouteImport
     }
     '/(app)/dashboard': {
@@ -165,6 +179,7 @@ declare module '@tanstack/react-router' {
 interface appRouteRouteChildren {
   appAgentMonitoringRoute: typeof appAgentMonitoringRoute
   appBacktestHubRoute: typeof appBacktestHubRoute
+  appCorrelationsRoute: typeof appCorrelationsRoute
   appDashboardRoute: typeof appDashboardRoute
   appMacroRoute: typeof appMacroRoute
   appOmsRoute: typeof appOmsRoute
@@ -176,6 +191,7 @@ interface appRouteRouteChildren {
 const appRouteRouteChildren: appRouteRouteChildren = {
   appAgentMonitoringRoute: appAgentMonitoringRoute,
   appBacktestHubRoute: appBacktestHubRoute,
+  appCorrelationsRoute: appCorrelationsRoute,
   appDashboardRoute: appDashboardRoute,
   appMacroRoute: appMacroRoute,
   appOmsRoute: appOmsRoute,
@@ -192,6 +208,7 @@ export interface FileRoutesByFullPath {
   '/': typeof appRouteRouteWithChildren
   '/agent-monitoring': typeof appAgentMonitoringRoute
   '/backtest-hub': typeof appBacktestHubRoute
+  '/correlations': typeof appCorrelationsRoute
   '/dashboard': typeof appDashboardRoute
   '/macro': typeof appMacroRoute
   '/oms': typeof appOmsRoute
@@ -204,6 +221,7 @@ export interface FileRoutesByTo {
   '/': typeof appRouteRouteWithChildren
   '/agent-monitoring': typeof appAgentMonitoringRoute
   '/backtest-hub': typeof appBacktestHubRoute
+  '/correlations': typeof appCorrelationsRoute
   '/dashboard': typeof appDashboardRoute
   '/macro': typeof appMacroRoute
   '/oms': typeof appOmsRoute
@@ -218,6 +236,7 @@ export interface FileRoutesById {
   '/(app)': typeof appRouteRouteWithChildren
   '/(app)/agent-monitoring': typeof appAgentMonitoringRoute
   '/(app)/backtest-hub': typeof appBacktestHubRoute
+  '/(app)/correlations': typeof appCorrelationsRoute
   '/(app)/dashboard': typeof appDashboardRoute
   '/(app)/macro': typeof appMacroRoute
   '/(app)/oms': typeof appOmsRoute
@@ -232,6 +251,7 @@ export interface FileRouteTypes {
     | '/'
     | '/agent-monitoring'
     | '/backtest-hub'
+    | '/correlations'
     | '/dashboard'
     | '/macro'
     | '/oms'
@@ -243,6 +263,7 @@ export interface FileRouteTypes {
     | '/'
     | '/agent-monitoring'
     | '/backtest-hub'
+    | '/correlations'
     | '/dashboard'
     | '/macro'
     | '/oms'
@@ -255,6 +276,7 @@ export interface FileRouteTypes {
     | '/(app)'
     | '/(app)/agent-monitoring'
     | '/(app)/backtest-hub'
+    | '/(app)/correlations'
     | '/(app)/dashboard'
     | '/(app)/macro'
     | '/(app)/oms'
@@ -296,6 +318,7 @@ export const routeTree = rootRoute
       "children": [
         "/(app)/agent-monitoring",
         "/(app)/backtest-hub",
+        "/(app)/correlations",
         "/(app)/dashboard",
         "/(app)/macro",
         "/(app)/oms",
@@ -310,6 +333,10 @@ export const routeTree = rootRoute
     },
     "/(app)/backtest-hub": {
       "filePath": "(app)/backtest-hub.tsx",
+      "parent": "/(app)"
+    },
+    "/(app)/correlations": {
+      "filePath": "(app)/correlations.tsx",
       "parent": "/(app)"
     },
     "/(app)/dashboard": {
