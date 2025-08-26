@@ -13,11 +13,7 @@ import {
 } from "antd";
 import Title from "antd/es/typography/Title";
 import { useState } from "react";
-import {
-  SearchOutlined,
-  PlusOutlined,
-  InfoCircleOutlined,
-} from "@ant-design/icons";
+import { SearchOutlined, PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
 
 const { Text } = Typography;
@@ -35,9 +31,7 @@ interface CorrelationData {
 
 function RouteComponent() {
   const [searchValue, setSearchValue] = useState("");
-  const [correlations, setCorrelations] = useState<CorrelationData[]>([
-    { id: "1", ticker: "APPL", correlation: 0.0, tsla: 0.5, weight: 0.5 },
-  ]);
+  const [correlations, setCorrelations] = useState<CorrelationData[]>([]);
 
   const handleAddCorrelation = async () => {
     if (searchValue.trim()) {
@@ -52,7 +46,10 @@ function RouteComponent() {
 
       const payload = {
         tickers: [
-          searchValue.toUpperCase(),
+          ...searchValue
+            .toUpperCase()
+            .split(",")
+            .map((t) => t.trim()),
           ...correlations.map((c) => c.ticker),
         ],
         start_date: "1971-01-01",
@@ -69,14 +66,26 @@ function RouteComponent() {
         },
       });
 
-      const newCorrelation: CorrelationData = {
-        id: Date.now().toString(),
-        ticker: searchValue.toUpperCase(),
-        correlation: 0.0,
-        tsla: 0.5,
-        weight: 0.5,
-      };
-      setCorrelations([...correlations, newCorrelation]);
+      console.log("API Response:", res.data);
+      res.data?.correlations.forEach(([ticker, corr]: any) => {
+        setCorrelations((prev: any) => {
+          const existing = prev.find((c: any) => c.ticker === ticker);
+          if (existing) {
+            return prev.map((c: any) =>
+              c.ticker === ticker ? { ...c, correlation: Number(corr) } : c
+            );
+          }
+          return [
+            ...prev,
+            {
+              id: Date.now().toString(),
+              ticker,
+              correlation: Number(corr),
+              weight: 0.5,
+            },
+          ];
+        });
+      });
       setSearchValue("");
     }
   };
@@ -94,10 +103,17 @@ function RouteComponent() {
   };
 
   const totalWeight = correlations.reduce((sum, item) => sum + item.weight, 0);
-  const totalCorrelation = correlations.reduce(
-    (sum, item) => sum + item.correlation * item.weight,
-    0
-  );
+  const totalCorrelation =
+    correlations.reduce((sum, item) => {
+      console.log(
+        "item.correlation, item.weight",
+        item.correlation,
+        item.weight
+      );
+      return Number(sum + item.correlation * (item.weight / 100));
+    }, 0) * 100;
+
+  console.log("totalCorrelation", totalCorrelation);
 
   const columns = [
     {
@@ -121,24 +137,6 @@ function RouteComponent() {
             <Text style={{ color: "#ff4d4f", marginLeft: "4px" }}>*</Text>
           )}
         </div>
-      ),
-    },
-    {
-      title: "TSLA",
-      dataIndex: "tsla",
-      key: "tsla",
-      render: (value: number, record: CorrelationData) => (
-        <Input
-          size="small"
-          value={`${value}%`}
-          onChange={(e) => {
-            const numValue = Number.parseFloat(e.target.value.replace("%", ""));
-            if (!isNaN(numValue)) {
-              handleUpdateCorrelation(record.id, "tsla", numValue);
-            }
-          }}
-          style={{ width: "70px", textAlign: "center" }}
-        />
       ),
     },
     {
@@ -213,13 +211,6 @@ function RouteComponent() {
             >
               Submit
             </Button>
-            <div style={{ marginLeft: "20px" }}>
-              <Text style={{ color: "#1890ff" }}>
-                Field de búsqueda/autocompletado.
-                <br />
-                Agrega los tickers a la tabla de abajo
-              </Text>
-            </div>
           </div>
         </Card>
       </div>
@@ -253,33 +244,6 @@ function RouteComponent() {
 
         <Col xs={24} lg={8}>
           <Space direction="vertical" size="large" style={{ width: "100%" }}>
-            {/* Requirements Card */}
-            <Card
-              title={
-                <div
-                  style={{ display: "flex", alignItems: "center", gap: "8px" }}
-                >
-                  <InfoCircleOutlined style={{ color: "#1890ff" }} />
-                  <Text strong>Requerimientos</Text>
-                </div>
-              }
-              size="small"
-            >
-              <Space
-                direction="vertical"
-                size="small"
-                style={{ width: "100%" }}
-              >
-                <Text style={{ color: "#1890ff", fontSize: "13px" }}>
-                  Los fields de TSLA y weight deben tener dos dígitos.
-                </Text>
-                <Text style={{ color: "#1890ff", fontSize: "13px" }}>
-                  Los fields de weight deben tener máximo 2.00% como máximo y
-                  0.00% como mínimo cada uno.
-                </Text>
-              </Space>
-            </Card>
-
             {/* Total Weight Info */}
             <Card size="small">
               <Statistic
@@ -325,13 +289,6 @@ function RouteComponent() {
                   La suma de todos no debe superar el 100%
                 </Text>
               </div>
-            </Card>
-
-            {/* API Note */}
-            <Card size="small">
-              <Text style={{ color: "#ff4d4f", fontSize: "13px" }}>
-                * Viene de la API
-              </Text>
             </Card>
           </Space>
         </Col>
