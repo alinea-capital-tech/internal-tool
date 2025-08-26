@@ -39,10 +39,7 @@ function RouteComponent() {
         "https://ia.backend.alineacapitaltechnologies.com/v1/correlations";
       var usr = "alinea_ai_pruebas";
       var pass = "f/H9*LI{zUL.O>12vh+5>&=rabEd14d";
-      const token =
-        typeof window !== "undefined" && typeof window.btoa === "function"
-          ? window.btoa(`${usr}:${pass}`)
-          : Buffer.from(`${usr}:${pass}`, "utf-8").toString("base64");
+      const token = window.btoa(`${usr}:${pass}`);
 
       const payload = {
         tickers: [
