@@ -39,6 +39,10 @@ const Header = () => {
       label: "Strategy Health",
       href: "/strategy-health",
     },
+    {
+      label: "Correlations",
+      href: "/correlations",
+    },
   ];
 
   return (
